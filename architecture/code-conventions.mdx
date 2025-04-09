@@ -1,0 +1,382 @@
+---
+title: 'Code Conventions'
+description: 'Coding standards and best practices for the HeyHomie Next.js application'
+---
+
+# Code Conventions
+
+This document outlines the coding conventions and best practices for the HeyHomie Next.js application.
+
+## General Guidelines
+
+<Checklist>
+  - Use TypeScript for type safety
+  - Follow ESLint and Prettier configurations
+  - Write self-documenting code with clear naming
+  - Keep functions small and focused on a single responsibility
+  - Use meaningful variable and function names
+</Checklist>
+
+## Naming Conventions
+
+### Files and Directories
+
+<ResponseField name="React Components" type="PascalCase">
+  Example: `ProductCard.tsx`
+</ResponseField>
+
+<ResponseField name="Hooks" type="camelCase with 'use' prefix">
+  Example: `useProductData.ts`
+</ResponseField>
+
+<ResponseField name="Utility Functions" type="camelCase">
+  Example: `formatDate.ts`
+</ResponseField>
+
+<ResponseField name="Constants" type="UPPER_SNAKE_CASE for values, PascalCase for object-like constants">
+  Example: `MAX_ITEMS`, `DefaultTheme`
+</ResponseField>
+
+<ResponseField name="Types and Interfaces" type="PascalCase with relevant suffix">
+  Example: `ProductType.ts`, `UserInterface.ts`
+</ResponseField>
+
+### Variables and Functions
+
+<ResponseField name="Variables" type="camelCase">
+  Example: `userData`, `productList`
+</ResponseField>
+
+<ResponseField name="Boolean Variables" type="Use prefixes like 'is', 'has', 'should'">
+  Example: `isLoading`, `hasError`
+</ResponseField>
+
+<ResponseField name="Functions" type="camelCase, use verbs">
+  Example: `fetchData`, `updateUser`
+</ResponseField>
+
+<ResponseField name="Event Handlers" type="camelCase with 'handle' prefix">
+  Example: `handleSubmit`, `handleInputChange`
+</ResponseField>
+
+<ResponseField name="React Components" type="PascalCase">
+  Example: `ProductList`, `CheckoutForm`
+</ResponseField>
+
+## Code Organization
+
+### Component Structure
+
+```tsx
+// Imports
+import { FC, useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+
+// Types
+interface ComponentProps {
+  // ...
+}
+
+// Component
+const ExampleComponent: FC<ComponentProps> = ({ prop1, prop2 }) => {
+  // State declarations
+  const [data, setData] = useState(null);
+
+  // Hooks
+  const router = useRouter();
+
+  // Effects
+  useEffect(() => {
+    // ...
+  }, []);
+
+  // Event handlers
+  const handleClick = () => {
+    // ...
+  };
+
+  // Render helpers
+  const renderItems = () => {
+    // ...
+  };
+
+  // Main render
+  return (
+    <div>
+      {/* JSX */}
+    </div>
+  );
+};
+
+export default ExampleComponent;
+```
+
+### Import Order
+
+<Steps>
+  <Step title="React/Next.js imports">
+    ```tsx
+    import { useState, useEffect } from 'react';
+    import { useRouter } from 'next/navigation';
+    ```
+  </Step>
+
+  <Step title="Third-party libraries">
+    ```tsx
+    import { format } from 'date-fns';
+    import { useForm } from 'react-hook-form';
+    ```
+  </Step>
+
+  <Step title="Absolute imports from the application">
+    ```tsx
+    import { Button } from 'src/components/Button';
+    import { useAuth } from 'src/hooks/useAuth';
+    ```
+  </Step>
+
+  <Step title="Relative imports from the current directory">
+    ```tsx
+    import { ProductForm } from './ProductForm';
+    import { productValidation } from './utils';
+    ```
+  </Step>
+
+  <Step title="CSS/SCSS imports">
+    ```tsx
+    import './styles.css';
+    ```
+  </Step>
+</Steps>
+
+## TypeScript Guidelines
+
+### Type Definitions
+
+<Tabs>
+  <Tab title="Interfaces">
+    Use interfaces for object shapes that will be implemented or extended:
+
+    ```tsx
+    // Interface for objects with implementation
+    interface User {
+      id: string;
+      name: string;
+      email: string;
+    }
+    ```
+  </Tab>
+
+  <Tab title="Type Aliases">
+    Use type aliases for unions, primitives, and complex types:
+
+    ```tsx
+    // Type for union or complex types
+    type Status = 'idle' | 'loading' | 'success' | 'error';
+    type UserMap = Record<string, User>;
+    ```
+  </Tab>
+
+  <Tab title="Function Types">
+    Add explicit return types to functions, especially exported ones:
+
+    ```tsx
+    // Function with explicit return type
+    function formatUser(user: User): string {
+      return `${user.name} (${user.email})`;
+    }
+    ```
+  </Tab>
+</Tabs>
+
+### Use Type Inference Where Appropriate
+
+```tsx
+// Type inference is clear here, no need for explicit type
+const [count, setCount] = useState(0);
+
+// For complex types, provide explicit type
+const [users, setUsers] = useState<User[]>([]);
+```
+
+## Material UI Guidelines
+
+### Styling
+
+<CodeGroup>
+  ```tsx Good
+  // Good: Using theme values
+  <Box
+    sx={{
+      p: 2,
+      mt: 3,
+      bgcolor: 'background.paper',
+      borderRadius: 1,
+    }}
+  >
+    <Typography color="primary.main">Content</Typography>
+  </Box>
+  ```
+
+  ```tsx Bad
+  // Bad: Hard-coded values
+  <Box
+    sx={{
+      padding: '16px',
+      marginTop: '24px',
+      backgroundColor: '#ffffff',
+      borderRadius: '4px',
+    }}
+  >
+    <Typography style={{ color: '#1976d2' }}>Content</Typography>
+  </Box>
+  ```
+</CodeGroup>
+
+### Component Props
+
+<CodeGroup>
+  ```tsx Spread Props
+  interface ButtonProps {
+    variant?: 'contained' | 'outlined' | 'text';
+    children: React.ReactNode;
+    disabled?: boolean;
+  }
+
+  const CustomButton: FC<ButtonProps> = ({
+    variant = 'contained',
+    disabled = false,
+    children,
+    ...props
+  }) => {
+    return (
+      <Button variant={variant} disabled={disabled} {...props}>
+        {children}
+      </Button>
+    );
+  };
+  ```
+</CodeGroup>
+
+## State Management
+
+<AccordionGroup>
+  <Accordion icon="code" title="Local State">
+    - Use `useState` for component-specific state
+    - Use `useReducer` for complex state logic
+
+    ```tsx
+    // Simple state
+    const [count, setCount] = useState(0);
+
+    // Complex state
+    const [state, dispatch] = useReducer(reducer, initialState);
+    ```
+  </Accordion>
+
+  <Accordion icon="globe" title="Global State">
+    - Use React Context for global state that doesn't change often
+    - Use SWR for server state
+
+    ```tsx
+    // Using context
+    const { user } = useAuth();
+
+    // Using SWR for server state
+    const { data, error } = useSWR('/api/products', fetcher);
+    ```
+  </Accordion>
+
+  <Accordion icon="keyboard" title="Form State">
+    - Use React Hook Form for form state management
+    - Use Yup for schema validation
+
+    ```tsx
+    const { register, handleSubmit, errors } = useForm({
+      resolver: yupResolver(schema)
+    });
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Error Handling
+
+```tsx
+try {
+  await api.post('/endpoint', data);
+} catch (error) {
+  console.error('Failed to post data:', error);
+  // User-friendly message
+  setError('Unable to save data. Please try again later.');
+}
+```
+
+## Comments
+
+<CodeGroup>
+  ```tsx JSDoc
+  /**
+   * Formats a date string into a localized date display
+   *
+   * @param dateString - ISO date string to format
+   * @param locale - Locale to use for formatting (defaults to user's locale)
+   * @returns Formatted date string
+   */
+  function formatDate(dateString: string, locale?: string): string {
+    // Implementation
+  }
+  ```
+</CodeGroup>
+
+## Testing
+
+```tsx
+describe('ProductCard', () => {
+  it('displays product name and price', () => {
+    // Arrange
+    const product = { name: 'Test Product', price: 99.99 };
+
+    // Act
+    render(<ProductCard product={product} />);
+
+    // Assert
+    expect(screen.getByText(product.name)).toBeInTheDocument();
+    expect(screen.getByText(`$${product.price}`)).toBeInTheDocument();
+  });
+});
+```
+
+## Git Commit Guidelines
+
+Format: `type(scope): subject`
+
+<CodeGroup>
+  ```bash Feature
+  feat(product): add product search functionality
+  ```
+
+  ```bash Fix
+  fix(auth): resolve login redirect issue
+  ```
+
+  ```bash Docs
+  docs(readme): update installation instructions
+  ```
+
+  ```bash Refactor
+  refactor(cart): simplify cart calculation logic
+  ```
+</CodeGroup>
+
+## Code Review Checklist
+
+<Checklist>
+  - Does the code follow the project's style guide?
+  - Is the code type-safe?
+  - Are there any potential performance issues?
+  - Is the code well-tested?
+  - Is error handling implemented properly?
+  - Is the component structure sensible?
+  - Are variable/function names clear and descriptive?
+  - Is the code DRY (Don't Repeat Yourself)?
+</Checklist> 

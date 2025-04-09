@@ -1,0 +1,164 @@
+---
+title: 'Developer Onboarding Checklist'
+description: 'Step-by-step guide for new developers to get up to speed on the project'
+---
+
+# Developer Onboarding Checklist
+
+Welcome to the HeyHomie Next.js application development team! This checklist will guide you through the process of getting up to speed and becoming productive.
+
+## Day 1: Environment Setup & Orientation
+
+<Checklist>
+  - Get access to the code repository
+  - Set up local development environment using [Development Setup](/development-setup)
+  - Configure your editor with recommended extensions and settings
+  - Run the application locally
+  - Install and configure Git hooks using Husky
+  - Review the project README and documentation
+  - Attend project introduction meeting with your mentor
+</Checklist>
+
+## Day 2: Codebase Exploration
+
+<Checklist>
+  - Read through [Architecture Overview](/architecture/overview) to understand the project structure
+  - Review [Code Conventions](/architecture/code-conventions) to understand coding standards
+  - Explore the directory structure and understand feature organization
+  - Review existing components in `src/components`
+  - Review the routing structure in `src/routes/paths.ts`
+  - Understand the authentication flow in `src/auth`
+  - Review how API calls work using [API Integration Guide](/api-reference/integration-guide)
+</Checklist>
+
+## Day 3: Deeper Understanding
+
+<Checklist>
+  - Understand Material UI theme customization in `src/theme`
+  - Review common UI components and their usage patterns
+  - Understand how SWR is used for data fetching
+  - Review how forms are handled with React Hook Form
+  - Explore state management patterns across the application
+  - Practice creating a simple component following established patterns
+  - Set up the deployment workflow with [Google Cloud CLI](#day-5-deployment-workflow)
+</Checklist>
+
+## Day 4: First Task & Code Review
+
+<Checklist>
+  - Complete a simple bugfix or small enhancement (assigned by your mentor)
+  - Apply the Git workflow from [Git Guide](/git-guide)
+  - Write clean, well-documented code following our conventions
+  - Create a pull request following the project's workflow
+  - Participate in your first code review
+  - Incorporate feedback and improve your code
+  - Meet with your mentor to discuss progress and questions
+</Checklist>
+
+## Day 5: Deployment Workflow
+
+<Steps>
+  <Step title="Install Google Cloud CLI">
+    ```bash
+    # For Debian/Ubuntu
+    echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main" | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+    curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key --keyring /usr/share/keyrings/cloud.google.gpg add -
+    sudo apt-get update && sudo apt-get install google-cloud-sdk
+
+    # For macOS
+    brew install --cask google-cloud-sdk
+    ```
+  </Step>
+
+  <Step title="Login to Google Cloud">
+    ```bash
+    gcloud auth login
+    ```
+  </Step>
+
+  <Step title="Deploy to Development Environment">
+    ```bash
+    ./scripts/deploy.sh
+    ```
+
+    <Note>
+      ⚠️ **IMPORTANT**: Only senior team members should deploy to production using other deployment scripts
+    </Note>
+  </Step>
+
+  <Step title="Monitor and Verify Deployment">
+    - Monitor deployment in Google Cloud Console
+    - Verify your deployment in the development environment
+  </Step>
+</Steps>
+
+## Learning Resources
+
+### General Resources
+
+<CardGroup cols={2}>
+  <Card title="Next.js Documentation" icon="react" href="https://nextjs.org/docs">
+    Official Next.js documentation for learning about the framework
+  </Card>
+  <Card title="TypeScript Handbook" icon="code" href="https://www.typescriptlang.org/docs/handbook/intro.html">
+    Complete guide to TypeScript language features
+  </Card>
+  <Card title="Material UI Documentation" icon="palette" href="https://mui.com/material-ui/getting-started/overview/">
+    Material UI component library documentation
+  </Card>
+</CardGroup>
+
+### Project-Specific Resources
+
+<CardGroup cols={2}>
+  <Card title="Architecture Overview" icon="sitemap" href="/architecture/overview">
+    Technical architecture documentation
+  </Card>
+  <Card title="Component Development Guide" icon="puzzle-piece" href="/architecture/component-guide">
+    Guide for building components
+  </Card>
+  <Card title="API Integration Guide" icon="code" href="/api-reference/integration-guide">
+    API integration documentation
+  </Card>
+  <Card title="Code Conventions" icon="book" href="/architecture/code-conventions">
+    Coding standards and best practices
+  </Card>
+  <Card title="Git Guide" icon="code-branch" href="/git-guide">
+    Git workflow and best practices
+  </Card>
+</CardGroup>
+
+## Getting Help
+
+- **Code Questions**: Reach out to the team through the development chat
+- **Process Questions**: Ask your assigned mentor or team lead
+- **Technical Issues**: Create a support ticket in the project management system
+
+## Common Pain Points and Solutions
+
+<AccordionGroup>
+  <Accordion icon="box" title="Module not found errors">
+    **Solution**: Make sure you've installed all dependencies and that import paths are correct. Check for typos in import statements.
+  </Accordion>
+  
+  <Accordion icon="triangle-exclamation" title="TypeScript errors">
+    **Solution**: Run `yarn ts` to see detailed error messages. Ensure that your types are properly defined and imported.
+  </Accordion>
+  
+  <Accordion icon="brush" title="Component styling inconsistencies">
+    **Solution**: Follow the styling guidelines in the [Component Guide](/architecture/component-guide) document and use theme values for consistent styling.
+  </Accordion>
+  
+  <Accordion icon="server" title="API calls not working">
+    **Solution**: Check that the API endpoints are correct and that you're handling authentication properly. Console.log the request and response for debugging.
+  </Accordion>
+</AccordionGroup>
+
+## Next Steps After Onboarding
+
+As you become more comfortable with the codebase, start exploring these areas:
+
+1. **Performance Optimization**: Look for ways to optimize component rendering and data fetching
+2. **Accessibility**: Ensure that all components are accessible to users with disabilities
+3. **Testing**: Improve test coverage and learn about testing patterns
+4. **Documentation**: Help improve project documentation with clarifications and examples 

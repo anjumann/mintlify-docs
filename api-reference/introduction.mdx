@@ -1,33 +1,143 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: 'API Reference Introduction'
+description: 'Overview of the HeyHomie API architecture and patterns'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+# API Reference Introduction
 
-## Welcome
+This section provides comprehensive documentation for integrating with the HeyHomie backend services.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+## API Overview
 
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file
-</Card>
+The HeyHomie application uses a RESTful API architecture for communicating with backend services. The API is organized around resources, using standard HTTP methods and status codes, and returns JSON responses.
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key" href="/api-reference/integration-guide#authentication">
+    Learn about API authentication mechanisms
+  </Card>
+  <Card title="Error Handling" icon="bug" href="/api-reference/integration-guide#error-handling">
+    Understand API error patterns and handling
+  </Card>
+  <Card title="Data Fetching" icon="arrows-spin" href="/api-reference/integration-guide#data-fetching-with-swr">
+    Explore SWR for efficient data fetching
+  </Card>
+  <Card title="Mock Data" icon="square-code" href="/api-reference/integration-guide#api-mocking-for-development">
+    Use mock data for development
+  </Card>
+</CardGroup>
+
+## API Client Setup
+
+The application uses Axios for API requests, with the base configuration located in `src/utils/axios.ts`. This provides:
+
+- Consistent request handling
+- Authentication header management
+- Error interception
+- Environment-specific configurations
+
+## API Endpoints
+
+The main API endpoints are organized by resource type:
+
+| Resource   | Endpoints                           | Description                           |
+|------------|-------------------------------------|---------------------------------------|
+| Auth       | `/auth/login`, `/auth/register`     | Authentication operations             |
+| Products   | `/products`, `/products/{id}`       | Product management                    |
+| Orders     | `/orders`, `/orders/{id}`           | Order management                      |
+| Users      | `/users`, `/users/{id}`             | User management                       |
+| Settings   | `/settings`                         | Application settings                  |
+
+## Request Examples
+
+<CodeGroup>
+  ```typescript GET
+  // GET request example
+  const fetchData = async () => {
+    try {
+      const response = await api.get('/products');
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching data:', error);
+      throw error;
+    }
+  };
+  ```
+
+  ```typescript POST
+  // POST request example
+  const createItem = async (data) => {
+    try {
+      const response = await api.post('/products', data);
+      return response.data;
+    } catch (error) {
+      console.error('Error creating item:', error);
+      throw error;
+    }
+  };
+  ```
+
+  ```typescript PUT
+  // PUT request example
+  const updateItem = async (id, data) => {
+    try {
+      const response = await api.put(`/products/${id}`, data);
+      return response.data;
+    } catch (error) {
+      console.error('Error updating item:', error);
+      throw error;
+    }
+  };
+  ```
+
+  ```typescript DELETE
+  // DELETE request example
+  const deleteItem = async (id) => {
+    try {
+      const response = await api.delete(`/products/${id}`);
+      return response.data;
+    } catch (error) {
+      console.error('Error deleting item:', error);
+      throw error;
+    }
+  };
+  ```
+</CodeGroup>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+The API uses JWT (JSON Web Token) based authentication. Tokens are:
+
+- Received after successful login
+- Stored securely
+- Automatically attached to requests
+- Refreshed when expired
+
+## Response Format
+
+API responses follow a consistent format:
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "success": true,
+  "data": {
+    // Response data
+  },
+  "message": "Operation successful"
+}
 ```
+
+For errors:
+
+```json
+{
+  "success": false,
+  "error": {
+    "code": "ERROR_CODE",
+    "message": "Human-readable error message"
+  }
+}
+```
+
+## Next Steps
+
+For more detailed information on API integration patterns, including examples with SWR, error handling, and best practices, see the [API Integration Guide](/api-reference/integration-guide).

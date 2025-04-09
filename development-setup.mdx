@@ -1,0 +1,187 @@
+---
+title: 'Development Environment Setup'
+description: 'Set up your local development environment for the HeyHomie Next.js application'
+---
+
+# Development Environment Setup
+
+This guide will help you set up your development environment for working on the HeyHomie Next.js application.
+
+## Prerequisites
+
+Before you begin, make sure you have the following installed:
+
+<Steps>
+  <Step title="Install Node.js">
+    Version 16.x or 18.x is required.
+
+    We strongly recommend using [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm) to manage your Node.js installations.
+
+    ```bash
+    # Install NVM
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+    # or with wget
+    wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+
+    # Install and use the correct Node.js version
+    nvm install 18
+    nvm use 18
+    ```
+  </Step>
+
+  <Step title="Install Yarn">
+    Our project requires Yarn as the package manager.
+
+    ```bash
+    # Install Yarn globally
+    npm install -g yarn
+
+    # Verify installation
+    yarn --version
+    ```
+  </Step>
+</Steps>
+
+## Setting Up the Project
+
+<Steps>
+  <Step title="Clone the Repository">
+    ```bash
+    git clone <repository-url>
+    cd heyhomie-next-app
+    ```
+  </Step>
+
+  <Step title="Set up Environment Variables">
+    1. Create a `.env` file in the root directory
+    2. Copy the contents from `.env.example` (if it exists) or ask a team member for the required environment variables
+    3. Update the values as needed for your local development
+  </Step>
+
+  <Step title="Install Dependencies">
+    You must use Yarn for this project:
+
+    ```bash
+    yarn install
+    ```
+  </Step>
+
+  <Step title="Start the Development Server">
+    ```bash
+    yarn dev
+    ```
+
+    The application will be available at [http://localhost:8083](http://localhost:8083).
+  </Step>
+</Steps>
+
+## Code Editor Setup
+
+We recommend using Visual Studio Code with the following extensions:
+
+- ESLint
+- Prettier
+- TypeScript and JavaScript Language Features
+- Material Icon Theme
+- Auto Import
+
+### VS Code Settings
+
+Add these settings to your VS Code workspace settings:
+
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+  },
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true
+}
+```
+
+## Available Scripts
+
+<ResponseField name="yarn dev" type="command">
+  Start the development server
+</ResponseField>
+
+<ResponseField name="yarn build" type="command">
+  Build the application for production
+</ResponseField>
+
+<ResponseField name="yarn start" type="command">
+  Start the production server
+</ResponseField>
+
+<ResponseField name="yarn lint" type="command">
+  Run ESLint to check for code issues
+</ResponseField>
+
+<ResponseField name="yarn lint:fix" type="command">
+  Fix ESLint issues automatically
+</ResponseField>
+
+<ResponseField name="yarn prettier" type="command">
+  Format code with Prettier
+</ResponseField>
+
+<ResponseField name="yarn ts" type="command">
+  Run TypeScript type checking
+</ResponseField>
+
+<ResponseField name="yarn ts:watch" type="command">
+  Run TypeScript in watch mode
+</ResponseField>
+
+<ResponseField name="yarn re:start" type="command">
+  Clean, reinstall dependencies, and start development server
+</ResponseField>
+
+<ResponseField name="yarn re:build" type="command">
+  Clean, reinstall dependencies, and build for production
+</ResponseField>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion icon="code-branch" title="Node version mismatch">
+    Use `nvm` to switch to the correct Node.js version:
+
+    ```bash
+    nvm use 18
+    ```
+  </Accordion>
+
+  <Accordion icon="server" title="Port already in use">
+    Change the port in the `package.json` dev script or kill the process using the port
+
+    On Linux/Mac:
+    ```bash
+    lsof -i :8083
+    kill -9 <PID>
+    ```
+
+    On Windows:
+    ```bash
+    netstat -ano | findstr :8083
+    taskkill /PID <PID> /F
+    ```
+  </Accordion>
+
+  <Accordion icon="box" title="Module not found errors">
+    Try cleaning and reinstalling node_modules:
+
+    ```bash
+    yarn re:start
+    ```
+  </Accordion>
+
+  <Accordion icon="triangle-exclamation" title="TypeScript errors">
+    Run `yarn ts` to see detailed TypeScript errors
+  </Accordion>
+</AccordionGroup>
+
+## Getting Help
+
+If you encounter any issues that you cannot resolve, please reach out to the team for assistance. 

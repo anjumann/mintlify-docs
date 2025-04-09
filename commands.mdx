@@ -1,0 +1,359 @@
+---
+title: 'Useful Commands'
+description: 'Reference guide for common commands used in the HeyHomie application'
+---
+
+# Useful Commands
+
+This document provides a reference of useful commands for working with the HeyHomie Next.js application.
+
+## Project Setup
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd heyhomie-next-app
+
+# Install dependencies with Yarn (recommended)
+yarn install
+
+# Install dependencies with npm
+npm install --legacy-peer-deps
+```
+
+## Development Commands
+
+<ResponseField name="Start development server" type="command">
+  ```bash
+  yarn dev
+  # or
+  npm run dev
+  ```
+</ResponseField>
+
+<ResponseField name="Start with TypeScript checking" type="command">
+  ```bash
+  yarn dev:ts
+  # or
+  npm run dev:ts
+  ```
+</ResponseField>
+
+## Code Quality Commands
+
+<ResponseField name="TypeScript type checking" type="command">
+  ```bash
+  yarn ts
+  # or
+  npm run ts
+  ```
+</ResponseField>
+
+<ResponseField name="TypeScript watch mode" type="command">
+  ```bash
+  yarn ts:watch
+  # or
+  npm run ts:watch
+  ```
+</ResponseField>
+
+<ResponseField name="Run ESLint" type="command">
+  ```bash
+  yarn lint
+  # or
+  npm run lint
+  ```
+</ResponseField>
+
+<ResponseField name="Fix ESLint issues" type="command">
+  ```bash
+  yarn lint:fix
+  # or
+  npm run lint:fix
+  ```
+</ResponseField>
+
+<ResponseField name="Format with Prettier" type="command">
+  ```bash
+  yarn prettier
+  # or
+  npm run prettier
+  ```
+</ResponseField>
+
+<ResponseField name="Pre-commit type checking" type="command">
+  ```bash
+  yarn check-types
+  # or
+  npm run check-types
+  ```
+</ResponseField>
+
+## Building and Deployment
+
+<ResponseField name="Build for production" type="command">
+  ```bash
+  yarn build
+  # or
+  npm run build
+  ```
+</ResponseField>
+
+<ResponseField name="Start production server" type="command">
+  ```bash
+  yarn start
+  # or
+  npm run start
+  ```
+</ResponseField>
+
+<ResponseField name="Clean reinstall and start" type="command">
+  ```bash
+  yarn re:start
+  # or
+  npm run re:start
+  ```
+</ResponseField>
+
+<ResponseField name="Clean reinstall and build" type="command">
+  ```bash
+  yarn re:build
+  # or
+  npm run re:build
+  ```
+</ResponseField>
+
+<ResponseField name="Clean reinstall with npm" type="command">
+  ```bash
+  yarn re:build-npm
+  # or
+  npm run re:build-npm
+  ```
+</ResponseField>
+
+## Clean Up
+
+<ResponseField name="Remove build artifacts" type="command">
+  ```bash
+  yarn rm:all
+  # or
+  npm run rm:all
+  ```
+</ResponseField>
+
+## Docker Commands
+
+<Tabs>
+  <Tab title="Development">
+    ```bash
+    # Build Docker image for development
+    docker build -t heyhomie-next-app .
+    
+    # Run Docker container
+    docker run -p 8083:8083 heyhomie-next-app
+    ```
+  </Tab>
+  <Tab title="Production">
+    ```bash
+    # Build Docker image for production
+    docker build -f Dockerfile.prod -t heyhomie-next-app-prod .
+    
+    # Run with environment variables
+    docker run -p 8083:8083 -e NEXT_PUBLIC_API_URL=<api-url> heyhomie-next-app
+    ```
+  </Tab>
+</Tabs>
+
+## Git Commands
+
+<AccordionGroup>
+  <Accordion icon="code-branch" title="Branch Management">
+    ```bash
+    # Create a new branch
+    git checkout -b feature/feature-name
+    
+    # Pull latest changes
+    git pull origin main
+    
+    # Merge main into your branch
+    git merge main
+    ```
+  </Accordion>
+
+  <Accordion icon="code-commit" title="Committing Changes">
+    ```bash
+    # Add all changes
+    git add .
+    
+    # Commit changes
+    git commit -m "feat: description of the changes"
+    
+    # Push changes
+    git push origin feature/feature-name
+    ```
+  </Accordion>
+
+  <Accordion icon="code-compare" title="Advanced Git Operations">
+    ```bash
+    # Resolve conflicts
+    git mergetool
+    
+    # Squash commits
+    git rebase -i HEAD~<number-of-commits>
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Bundle Analysis
+
+<ResponseField name="Analyze bundle size" type="command">
+  ```bash
+  ANALYZE=true yarn build
+  # or
+  ANALYZE=true npm run build
+  ```
+</ResponseField>
+
+## Environment Variables
+
+```bash
+# Create .env file
+cp .env.example .env
+
+# Edit .env file
+nano .env
+# or
+code .env
+```
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion icon="node-js" title="Node.js and Package Managers">
+    ```bash
+    # Check Node.js version
+    node -v
+    
+    # Check Yarn version
+    yarn -v
+    
+    # Check npm version
+    npm -v
+    ```
+  </Accordion>
+
+  <Accordion icon="server" title="Port Issues">
+    ```bash
+    # Linux/Mac
+    lsof -i :8083
+    kill -9 <PID>
+    
+    # Windows
+    netstat -ano | findstr :8083
+    taskkill /PID <PID> /F
+    ```
+  </Accordion>
+
+  <Accordion icon="broom" title="Cache Clearing">
+    ```bash
+    # Clear npm cache
+    npm cache clean --force
+    
+    # Clear yarn cache
+    yarn cache clean
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Testing
+
+<ResponseField name="Run tests" type="command">
+  ```bash
+  yarn test
+  # or
+  npm run test
+  ```
+</ResponseField>
+
+<ResponseField name="Run tests in watch mode" type="command">
+  ```bash
+  yarn test:watch
+  # or
+  npm run test:watch
+  ```
+</ResponseField>
+
+<ResponseField name="Run tests with coverage" type="command">
+  ```bash
+  yarn test:coverage
+  # or
+  npm run test:coverage
+  ```
+</ResponseField>
+
+## Performance Optimization
+
+```bash
+# Run Lighthouse audit
+npx lighthouse https://localhost:8083 --view
+
+# Check for unused dependencies
+npx depcheck
+
+# Find large dependencies
+npx find-unused-dependencies
+```
+
+## Logging and Debugging
+
+```bash
+# Enable verbose logging in Next.js
+NODE_OPTIONS='--inspect' yarn dev
+# or
+NODE_OPTIONS='--inspect' npm run dev
+
+# Enable debug mode for SWR
+localStorage.setItem('swr-debug', 'true')
+```
+
+## Common Git Workflow
+
+<Steps>
+  <Step title="Start new feature">
+    ```bash
+    git checkout main
+    git pull
+    git checkout -b feature/new-feature
+    ```
+  </Step>
+  
+  <Step title="Work on feature">
+    ```bash
+    # Make changes
+    git add .
+    git commit -m "feat: add new feature"
+    ```
+  </Step>
+  
+  <Step title="Keep branch up to date">
+    ```bash
+    git fetch origin
+    git rebase origin/main
+    ```
+  </Step>
+  
+  <Step title="Push and create PR">
+    ```bash
+    git push -u origin feature/new-feature
+    # Then create PR in GitHub UI
+    ```
+  </Step>
+  
+  <Step title="Clean up after merge">
+    ```bash
+    git checkout main
+    git pull
+    git branch -d feature/new-feature
+    ```
+  </Step>
+</Steps> 

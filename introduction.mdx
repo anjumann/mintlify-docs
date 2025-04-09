@@ -1,71 +1,84 @@
 ---
-title: Introduction
-description: "Welcome to the home of your new documentation"
+title: 'HeyHomie Documentation'
+description: 'Welcome to the documentation for the HeyHomie Next.js application'
 ---
 
-<img
-  className="block dark:hidden"
-  src="/images/hero-light.png"
-  alt="Hero Light"
-/>
-<img
-  className="hidden dark:block"
-  src="/images/hero-dark.png"
-  alt="Hero Dark"
-/>
+# HeyHomie Application Documentation
 
-## Setting up
+Welcome to the HeyHomie Next.js application documentation. This comprehensive guide will help you understand, develop, and deploy the HeyHomie application.
 
-The first step to world-class documentation is setting up your editing environments.
+## About HeyHomie
+
+HeyHomie is a Next.js application built with TypeScript and Material UI. It follows a feature-based organization pattern where code is grouped by feature rather than by type.
 
 <CardGroup cols={2}>
-  <Card
-    title="Edit Your Docs"
-    icon="pen-to-square"
-    href="https://mintlify.com/docs/quickstart"
-  >
-    Get your docs set up locally for easy development
+  <Card title="Get Started" icon="play" href="/development-setup">
+    Set up your development environment and start contributing
   </Card>
-  <Card
-    title="Preview Changes"
-    icon="image"
-    href="https://mintlify.com/docs/development"
-  >
-    Preview your changes before you push to make sure they're perfect
+  <Card title="Architecture" icon="sitemap" href="/architecture/overview">
+    Understand the application architecture and design
+  </Card>
+  <Card title="Components" icon="puzzle-piece" href="/architecture/component-guide">
+    Learn how to build components following our patterns
+  </Card>
+  <Card title="API Reference" icon="code" href="/api-reference/integration-guide">
+    Explore the API integration patterns
   </Card>
 </CardGroup>
 
-## Make it yours
+## Key Technologies
 
-Update your docs to your brand and add valuable content for the best user conversion.
-
-<CardGroup cols={2}>
-  <Card
-    title="Customize Style"
-    icon="palette"
-    href="https://mintlify.com/docs/settings/global"
-  >
-    Customize your docs to your company's colors and brands
+<CardGroup cols={3}>
+  <Card title="Next.js" icon="react">
+    Server-side rendering, static site generation, file-based routing, and API routes
   </Card>
-  <Card
-    title="Reference APIs"
-    icon="code"
-    href="https://mintlify.com/docs/api-playground/openapi"
-  >
-    Automatically generate endpoints from an OpenAPI spec
+  <Card title="TypeScript" icon="code">
+    Type safety, better developer experience, and easier refactoring
   </Card>
-  <Card
-    title="Add Components"
-    icon="screwdriver-wrench"
-    href="https://mintlify.com/docs/content/components/accordions"
-  >
-    Build interactive features and designs to guide your users
+  <Card title="Material UI" icon="palette">
+    Comprehensive component library with customizable theming
   </Card>
-  <Card
-    title="Get Inspiration"
-    icon="stars"
-    href="https://mintlify.com/customers"
-  >
-    Check out our showcase of our favorite documentation
+  <Card title="SWR" icon="refresh">
+    React Hooks for data fetching with caching and revalidation
+  </Card>
+  <Card title="React Hook Form" icon="wpforms">
+    Performance-focused forms with easy validation
+  </Card>
+  <Card title="Google Cloud" icon="cloud">
+    Cloud-based deployment infrastructure
   </Card>
 </CardGroup>
+
+## Quick Links
+
+<AccordionGroup>
+  <Accordion icon="user" title="For New Developers">
+    If you're new to the project, follow these documents in order:
+    
+    1. [Development Setup](/development-setup)
+    2. [Onboarding Checklist](/onboarding-checklist)
+    3. [Architecture Overview](/architecture/overview)
+    4. [Git Guide](/git-guide)
+    5. [Commands](/commands)
+  </Accordion>
+  <Accordion icon="code" title="For Active Contributors">
+    If you're an active contributor, these documents will be most useful:
+    
+    1. [Commands](/commands)
+    2. [Code Conventions](/architecture/code-conventions)
+    3. [Component Guide](/architecture/component-guide)
+    4. [API Integration Guide](/api-reference/integration-guide)
+    5. [Deployment Guide](/deployment/overview)
+  </Accordion>
+</AccordionGroup>
+
+## Documentation Update Process
+
+These documentation files should be kept up-to-date as the project evolves. If you make significant changes to the architecture, components, or workflows, please update the relevant documentation.
+
+To update documentation:
+
+1. Make your changes to the appropriate MDX file
+2. Ensure formatting is consistent
+3. Create a pull request with your changes
+4. Request review from the team
