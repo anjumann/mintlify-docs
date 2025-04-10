@@ -3,11 +3,11 @@
   "theme": "mint",
   "name": "HeyHomie Documentation",
   "colors": {
-    "primary": "#0284c7",
-    "light": "#38bdf8",
-    "dark": "#0369a1"
+    "primary": "#FF6F61",
+    "light": "#FF8F7D",
+    "dark": "#E44D3A"
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon.png",
   "navigation": {
     "tabs": [
       {
@@ -107,7 +107,77 @@
   },
   "footer": {
     "socials": {
-      "github": "https://github.com/heyhomie"
+      "github": "https://github.com/heyhomie",
+      "website": "https://heyhomie.me"
     }
+  },
+  "topbarLinks": [
+    {
+      "name": "API Reference",
+      "url": "https://heyhomie.me/api/system/docs"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://heyhomie.me/dashboard"
+  },
+  "anchors": [
+    {
+      "name": "API Reference",
+      "icon": "rectangle-terminal",
+      "url": "api-reference"
+    },
+    {
+      "name": "Frontend Docs",
+      "icon": "browser",
+      "url": "frontend"
+    },
+    {
+      "name": "Backend Docs",
+      "icon": "server",
+      "url": "backend"
+    },
+    {
+      "name": "Version History",
+      "icon": "clock-rotate-left",
+      "url": "version-history"
+    },
+    {
+      "name": "Contact",
+      "icon": "envelope",
+      "url": "contact"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": ["README", "api-reference", "version-history", "contact"]
+    },
+    {
+      "group": "Frontend Documentation",
+      "pages": [
+        "frontend/index",
+        "frontend/setup",
+        "frontend/architecture",
+        "frontend/components",
+        "frontend/api",
+        "frontend/code-standards",
+        "frontend/deployment"
+      ]
+    },
+    {
+      "group": "Backend Documentation",
+      "pages": [
+        "backend/index",
+        "backend/getting-started",
+        "backend/architecture",
+        "backend/api-guidelines",
+        "backend/code-standards",
+        "backend/integrations"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "website": "https://heyhomie.me"
   }
 }
