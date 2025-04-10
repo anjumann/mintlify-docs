@@ -44,7 +44,7 @@
     {
       "group": "Getting Started",
       "pages": [
-        "README",
+        "introduction",
         "api-reference",
         "version-history", 
         "contact"

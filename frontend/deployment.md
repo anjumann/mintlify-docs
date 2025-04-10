@@ -108,5 +108,3 @@ After deployment, verify:
 - **Error Reporting**: For tracking client-side errors
 
 ## Contact
-
-<!-- For deployment issues, contact the DevOps team at devops@heyhomie.me. -->

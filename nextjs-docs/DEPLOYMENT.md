@@ -107,5 +107,3 @@ Common issues:
 - Production: Biweekly releases (alternate Mondays)
 
 ## Contact
-
-<!-- For deployment issues, contact the DevOps team at  -->
