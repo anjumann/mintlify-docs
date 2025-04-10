@@ -1,0 +1,81 @@
+{
+  "name": "HeyHomie Documentation",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "favicon": "/public/favicon.png",
+  "colors": {
+    "primary": "#FF6F61",
+    "light": "#FF8F7D",
+    "dark": "#E44D3A"
+  },
+  "topbarLinks": [
+    {
+      "name": "API Reference",
+      "url": "https://heyhomie.me/api/system/docs"
+    }
+  ],
+  "topbarCtaButton": {
+    "name": "Dashboard",
+    "url": "https://heyhomie.me/dashboard"
+  },
+  "versions": [
+    "v1.5.0"
+  ],
+  "anchors": [
+    {
+      "name": "API Reference",
+      "icon": "rectangle-terminal",
+      "url": "api-reference"
+    },
+    {
+      "name": "Frontend",
+      "icon": "browser",
+      "url": "frontend"
+    },
+    {
+      "name": "Backend",
+      "icon": "server",
+      "url": "backend"
+    }
+  ],
+  "navigation": [
+    {
+      "group": "Getting Started",
+      "pages": [
+        "README",
+        "api-reference",
+        "version-history", 
+        "contact"
+      ]
+    },
+    {
+      "group": "Frontend Documentation",
+      "pages": [
+        "frontend/index",
+        "frontend/setup",
+        "frontend/architecture",
+        "frontend/components",
+        "frontend/api",
+        "frontend/code-standards",
+        "frontend/deployment"
+      ]
+    },
+    {
+      "group": "Backend Documentation",
+      "pages": [
+        "backend/index",
+        "backend/getting-started",
+        "backend/architecture",
+        "backend/api-guidelines",
+        "backend/code-standards",
+        "backend/integrations"
+      ]
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/heyhomie",
+    "website": "https://heyhomie.me"
+  }
+} 

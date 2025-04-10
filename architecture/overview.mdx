@@ -3,205 +3,78 @@ title: 'Application Architecture'
 description: 'Overview of the HeyHomie Next.js application architecture'
 ---
 
-# HeyHomie Application Architecture
+# HeyHomie Architecture Overview
 
-This document outlines the architecture and key technical decisions of the HeyHomie Next.js application.
+This document provides a high-level overview of the HeyHomie architecture.
 
-## Overview
+## System Architecture
 
-HeyHomie is a Next.js application built with TypeScript and Material UI. It follows a feature-based organization pattern where code is grouped by feature rather than by type.
+HeyHomie follows a modern microservices architecture:
 
-<Frame>
-  <img src="/images/architecture-diagram.png" alt="HeyHomie Architecture Overview" />
-</Frame>
+![System Architecture](/images/system-architecture.png)
 
-## Architectural Layers
+## Key Components
 
-<AccordionGroup>
-  <Accordion icon="layer-group" title="1. UI Layer">
-    The UI layer is built with React components, organized in the following hierarchy:
-    
-    - **Layouts** (`src/components/layouts`) - Define the overall page structure
-    - **Pages** (`src/app/**`) - Next.js App Router pages
-    - **Components** (`src/components/**`) - Reusable UI components
-    - **Theme** (`src/theme`) - Material UI theme customization
-  </Accordion>
-  
-  <Accordion icon="brain" title="2. Application Layer">
-    The application layer handles business logic and state management:
-    
-    - **Hooks** (`src/hooks`) - Custom React hooks for shared logic
-    - **Context** (Various context providers) - For state management
-    - **Form Logic** (Using React Hook Form) - For form handling and validation
-  </Accordion>
-  
-  <Accordion icon="database" title="3. Data Layer">
-    The data layer is responsible for data fetching and persistence:
-    
-    - **API Clients** (`src/api`) - API service clients
-    - **SWR Hooks** - For data fetching, caching, and revalidation
-    - **Axios Configuration** (`src/utils/axios.ts`) - HTTP client setup
-  </Accordion>
-</AccordionGroup>
+### Frontend
 
-## Key Patterns
+- **Next.js Application**: Server-side rendered React application
+- **Tailwind CSS**: For styling components
+- **SWR**: For data fetching and caching
+- **React Context**: For state management
 
-### Routing
+### Backend
 
-The application uses Next.js App Router for routing, with route definitions centralized in `src/routes/paths.ts`.
+- **NestJS Framework**: TypeScript-based backend framework
+- **PostgreSQL**: Primary relational database
+- **ClickHouse**: Analytics database
+- **Redis**: Caching and queue management
+- **Medusa**: E-commerce engine integration
 
-```tsx
-// src/routes/paths.ts
-export const paths = {
-  // Root paths
-  root: '/',
-  
-  // Auth paths
-  auth: {
-    login: '/auth/login',
-    register: '/auth/register',
-    forgotPassword: '/auth/forgot-password',
-  },
-  
-  // Dashboard paths
-  dashboard: {
-    root: '/dashboard',
-    products: '/dashboard/products',
-    orders: '/dashboard/orders',
-    customers: '/dashboard/customers',
-  },
-  
-  // Other paths
-  // ...
-};
-```
+## Data Flow
 
-### State Management
+1. User interacts with the Next.js frontend
+2. Frontend makes API calls to the NestJS backend
+3. Backend processes business logic and interacts with databases
+4. Response flows back to the frontend
 
-State management is primarily handled through:
+## Infrastructure Architecture
 
-- React Context for global state
-- SWR for server state
-- Local component state for UI state
+The application is deployed on Google Cloud Platform:
 
-### Data Fetching
+- **Cloud Run**: For containerized services
+- **Cloud SQL**: For managed PostgreSQL
+- **Cloud Storage**: For static assets and media files
+- **Cloud CDN**: For content delivery
+- **Cloud Load Balancing**: For traffic management
 
-The application uses SWR for data fetching, providing:
+## Integration Architecture
 
-- Automatic revalidation
-- Caching
-- Optimistic updates
-- Error handling
+HeyHomie integrates with several third-party services:
 
-### Authentication
+- **Razorpay**: Payment processing
+- **ShipRocket**: Shipping and logistics
+- **Facebook/Instagram**: Social commerce
+- **Gumlet**: Image processing
 
-Authentication flows are handled in the `src/auth` directory, with protected routes and role-based access control.
+## Security Architecture
 
-### Error Handling
+- **JWT Authentication**: For user authentication
+- **OTP Verification**: For phone number validation
+- **Role-Based Access Control**: For authorization
+- **HTTPS**: For secure communication
+- **Cloud Armor**: For web application firewall
 
-Error handling is implemented through:
+## Monitoring Architecture
 
-- Sentry for error tracking and monitoring
-- Custom error boundaries
-- SWR error states for API errors
+- **Cloud Monitoring**: For system metrics
+- **Cloud Logging**: For application logs
+- **Error Reporting**: For error tracking
+- **Uptime Checks**: For service health monitoring
 
-## Directory Structure
+## For More Information
 
-```bash
-src/
-├── app/                   # Next.js pages using App Router
-│   ├── dashboard/         # Dashboard pages
-│   ├── auth/              # Authentication pages
-│   └── [other routes]/    # Other application routes
-├── api/                   # API clients
-├── assets/                # Static assets
-├── auth/                  # Authentication logic
-├── components/            # Shared UI components
-│   ├── animate/           # Animation components
-│   ├── carousel/          # Carousel components
-│   ├── chart/             # Chart components
-│   ├── hook-form/         # Form components
-│   ├── layouts/           # Layout components
-│   └── [other components]/
-├── dashboard/             # Dashboard specific components
-├── hooks/                 # Custom React hooks
-├── lib/                   # Utility libraries
-├── routes/                # Routing definitions
-├── theme/                 # Material UI theme
-│   ├── customShadows.ts   # Custom shadow definitions
-│   ├── index.ts           # Theme export
-│   ├── options/           # Theme options
-│   └── palette.ts         # Color palette
-├── types/                 # TypeScript type definitions
-└── utils/                 # Utility functions
-    ├── axios.ts           # Axios configuration
-    ├── format-*.ts        # Formatting utilities
-    └── [other utils]/
-```
+For more detailed architecture documentation:
 
-## Design Decisions
-
-<Tabs>
-  <Tab title="Next.js and TypeScript">
-    - **Why Next.js**: Server-side rendering, static site generation, file-based routing, API routes
-    - **Why TypeScript**: Type safety, better developer experience, easier refactoring
-  </Tab>
-  
-  <Tab title="Material UI">
-    - **Why Material UI**: Comprehensive component library, customizable theming, responsive design
-  </Tab>
-  
-  <Tab title="SWR for Data Fetching">
-    - **Why SWR**: Simple API, built-in caching, revalidation, optimistic updates
-  </Tab>
-  
-  <Tab title="Feature-based Organization">
-    - **Why Feature-based**: Better code co-location, easier navigation, improved encapsulation
-  </Tab>
-  
-  <Tab title="React Hook Form + Yup">
-    - **Why React Hook Form**: Performance, uncontrolled inputs, easy validation
-    - **Why Yup**: Schema-based validation, TypeScript integration
-  </Tab>
-</Tabs>
-
-## Development Workflow
-
-1. **Local Development**: `yarn dev` starts the development server
-2. **Type Checking**: `yarn ts` checks TypeScript types
-3. **Linting**: `yarn lint` runs ESLint
-4. **Formatting**: `yarn prettier` formats code with Prettier
-5. **Building**: `yarn build` builds for production
-6. **Deployment**: Docker-based deployment with `Dockerfile` or `Dockerfile.prod`
-
-## Performance Considerations
-
-- Code splitting via dynamic imports
-- Image optimization with Next.js Image component
-- Bundle size optimization with `@next/bundle-analyzer`
-- Server-side rendering for improved initial load
-- Memoization for expensive calculations
-
-## Security Considerations
-
-- Authentication and authorization
-- Environment variables for sensitive data
-- Input validation
-- HTTPS enforcement
-- Content Security Policy
-
-## Monitoring and Debugging
-
-- Sentry for error tracking
-- Custom logging
-- Performance monitoring
-
-## Extending the Application
-
-When extending the application:
-
-1. Follow the existing pattern for the feature type
-2. Reuse existing components when possible
-3. Add new routes to `src/routes/paths.ts`
-4. Add new API clients to `src/api/`
-5. Update types as needed in `src/types/` 
+- [Frontend Architecture](../frontend/architecture)
+- [Backend Architecture](../backend/architecture)
+- [Database Schema](../backend/database) 

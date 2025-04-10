@@ -7,12 +7,15 @@ Welcome to the official documentation for HeyHomie, an e-commerce platform built
 Our documentation is organized into two main sections:
 
 ### [Frontend Documentation](nextjs-docs/DOCUMENTATION.md)
+
 Everything related to the Next.js frontend application, including setup, architecture, components, and coding standards.
 
 ### [Backend Documentation](nestjs-docs/getting-started.md)
+
 All documentation related to the NestJS backend application, including architecture, API guidelines, and integrations.
 
 ### [API Reference](https://heyhomie.me/api/system/docs)
+
 Comprehensive API documentation available through Swagger UI.
 
 ## Getting Started

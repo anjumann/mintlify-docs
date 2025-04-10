@@ -6,8 +6,6 @@ This page documents the release history and notable changes to the HeyHomie plat
 
 **Version 1.5.0** (November 2023)
 
-## Version History
-
 ### v1.5.0 (November 2023)
 
 - Added advanced product filtering capabilities
@@ -73,4 +71,4 @@ Features planned for upcoming releases:
 - Multi-language support
 - Progressive Web App (PWA) capabilities
 
-For more details on specific releases, please refer to the release notes in our GitHub repository. 
+For more details on specific releases, please refer to the release notes in our GitHub repository.
